@@ -1,0 +1,49 @@
+Attempt at making a garbage collector in Rust.
+
+A "Object" is a collectable structure consisting of data and pointers
+("Collectable" could be a trait) the crucial thing is that the collector
+needs to know which elements of an objerct is pointers.
+
+The pointers point to a table of pointers called Handles, that can be
+redirected while moving items, this is crucial in order to compact the
+heap. (cache efficiency and so on...)
+
+A pointer is just an index in the heap, so it is a usize.
+
+A "Pile" is a vector of collectable objects
+
+Each object need a GC-header which contains
+    i.      a pointer to the next free block if it is itself a free block
+    ii.     a value if it is occupied
+
+so the GC-header is an enum
+
+a Handle should never change, but can be reused after free:
+    handles:    Vec<Option<usize>>
+
+
+allocating:
+    i.      aquire a handle (lowest that is available)
+    ii.     aquire a slot in the Pile
+
+
+moving:
+    i.      we have the handle
+    ii.     we know where it is
+    iii.    aquire a new slot in a Pile
+    iv.     move the object
+    v.      update the handle
+
+
+freeing:
+    i.      set the handle to None
+    ii.     set the entry to Free { next_free = head of free list }
+
+
+the free blocks are a linked list, and the next free element is the head of the list
+
+
+we will need more than one mutable reference to each object (someone owns it, AND the GC needs to mark the objects)
+so we need to use Arcs. an entry in the Pile could be an Arc.
+
+
