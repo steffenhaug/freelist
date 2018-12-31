@@ -44,7 +44,7 @@ impl<T> FreeList<T> {
             _                                => None
         }
     }
-    
+
     pub fn remove(&mut self, i: usize) -> Option<T> {
         /* We need ownership of the old entry, hence mem::replace */
         let entry = mem::replace(
@@ -113,7 +113,7 @@ impl<T> FreeList<T> {
 impl<T: fmt::Debug> fmt::Display for FreeList<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         writeln!(f, "FreeList. Next insert: {:?}. Len: {}.", self.head, self.len)?;
-        
+
         writeln!(f, "Memory:")?;
         for (i, v) in self.memory.iter().enumerate() {
             writeln!(f, "({}) \t{:?}", i, v)?;

@@ -1,16 +1,22 @@
 [package]
-name = "pile"
+name = "allocators"
 version = "0.1.0"
 authors = ["Steffen Haug <steffenandr@gmail.com>"]
 
 [dependencies]
 
 
+[dev-dependencies]
+criterion = "0.2"
 
-[lib]
-name = "pile"
-path = "src/lib.rs"
+[[bench]]
+name = "alloc_bench"
+harness = false
 
 [[bin]]
-name = "example"
-path = "src/bin.rs"
+name = "executable"
+path = "src/main.rs"
+
+[lib]
+name = "allocators"
+path = "src/lib.rs"

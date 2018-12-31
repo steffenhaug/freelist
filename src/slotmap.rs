@@ -26,7 +26,7 @@ struct Slot {
 
 #[derive(Debug, Clone, Copy)]
 pub struct Handle {
-    generation: usize, 
+    generation: usize,
     slot:       usize, /* address in the handles vector */
 }
 
@@ -75,7 +75,7 @@ impl<T> HandleMap<T> {
                 address:    addr,
             });
 
-            return Handle { 
+            return Handle {
                 generation: 1,
                 slot:       self.slots.len() - 1,
             };
@@ -84,7 +84,7 @@ impl<T> HandleMap<T> {
 
     pub fn remove(&mut self, h: Handle) {
         let generation = self.slots[h.slot].generation;
-        
+
         if h.generation != generation {
             return ();
         }
