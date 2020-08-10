@@ -1,6 +1,7 @@
 Attempt at making a garbage collector in Rust.
 (Not a garbage collector FOR rust, but one that programs can use to allocate
-structures with reference cycles such as graphs)
+structures with reference cycles such as graphs without doing anything sketchy
+like inspecting the programs memory and look for ref cycles)
 
 A "Object" is a collectable structure consisting of data and pointers
 ("Collectable" could be a trait) the crucial thing is that the collector
