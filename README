@@ -1,12 +1,14 @@
 Attempt at making a garbage collector in Rust.
+(Not a garbage collector FOR rust, but one that programs can use to allocate
+structures with reference cycles such as graphs)
 
 A "Object" is a collectable structure consisting of data and pointers
 ("Collectable" could be a trait) the crucial thing is that the collector
 needs to know which elements of an objerct is pointers.
 
 The pointers point to a table of pointers called Handles, that can be
-redirected while moving items, this is crucial in order to compact the
-heap. (cache efficiency and so on...)
+redirected while moving items, this is in order to compact the
+heap.
 
 A pointer is just an index in the heap, so it is a usize.
 
